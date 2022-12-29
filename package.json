@@ -1,0 +1,20 @@
+{
+  "name": "nest-typescript-starter-project",
+  "version": "1.0.0",
+  "description": "Node + Nest + TypeScript starter project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasBuecher/node-nest-typescript-starter-project.git"
+  },
+  "keywords": ["node", "nestjs", "typescript", "starter"],
+  "author": "Nicolas Buecher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicolasBuecher/node-nest-typescript-starter-project/issues"
+  },
+  "homepage": "https://github.com/NicolasBuecher/node-nest-typescript-starter-project#readme"
+}
