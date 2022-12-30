@@ -8,6 +8,8 @@
     "build": "npm run prebuild && tsc --project tsconfig.build.json",
     "start": "npm run build && node dist/main.js",
     "start:dev": "npx nodemon",
+    "lint": "eslint '{src,apps,libs,test}/**/*.ts'",
+    "lint:fix": "npm run lint -- --fix",
     "test": "echo \"Error: no test specified\""
   },
   "repository": {
@@ -28,6 +30,13 @@
   "homepage": "https://github.com/NicolasBuecher/node-nest-typescript-starter-project#readme",
   "devDependencies": {
     "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "eslint": "^8.30.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.1.7",
     "nodemon": "^2.0.20",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
