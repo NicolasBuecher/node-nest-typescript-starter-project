@@ -84,9 +84,19 @@
           }
       ],
 
+      // Enforce the export default when there is a single export from a module
+      // Disabled to follow Nest guidelines
+      // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/prefer-default-export.md
+      "import/prefer-default-export": "off",
+
       // Enforce the maximum depth callbacks that can be nested
       // https://eslint.org/docs/latest/rules/max-nested-callbacks
       "max-nested-callbacks" : ["error", 4],
+
+      // Disallow the use of console
+      // Disabled because that's a good practice in frontend only
+      // https://eslint.org/docs/latest/rules/no-console
+      "no-console": "off",
 
       // Enforce the use of explicit constants instead of meaningless numbers
       // https://eslint.org/docs/rules/no-magic-numbers
