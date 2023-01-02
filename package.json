@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Node + Nest + TypeScript starter project",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "prebuild": "rimraf ./dist",
     "build": "npm run prebuild && tsc --project tsconfig.build.json",
