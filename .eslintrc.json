@@ -42,6 +42,7 @@
       // Enable the use of syntax from ECMAScript modules
       "sourceType": "module"
   },
+  "ignorePatterns": ["swagger-static"],
   "rules": {
       // Rules disabled in Nest.js default ESLint config file
       "@typescript-eslint/interface-name-prefix": "off",

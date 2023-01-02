@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prebuild": "rimraf ./dist",
-    "build": "npm run prebuild && tsc --project tsconfig.build.json",
+    "build": "tsc --project tsconfig.build.json",
     "start": "npm run build && node dist/main.js",
     "start:dev": "npx nodemon",
     "lint": "eslint '{src,apps,libs,test}/**/*.ts'",
@@ -65,6 +65,7 @@
     "@nestjs/common": "^9.2.1",
     "@nestjs/core": "^9.2.1",
     "@nestjs/platform-express": "^9.2.1",
+    "@nestjs/serve-static": "^3.0.0",
     "@nestjs/swagger": "^6.1.4",
     "@prisma/client": "^4.8.0",
     "reflect-metadata": "^0.1.13",
