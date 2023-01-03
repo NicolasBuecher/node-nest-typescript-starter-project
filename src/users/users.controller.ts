@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from "@nestjs/common";
 import {
   ApiCreatedResponse,
@@ -71,8 +72,8 @@ export class UsersController {
     type: UserEntity,
     description: "OK. The user has been successfully fetched.",
   })
-  async findOne(@Param("id") id: string): Promise<UserEntity | null> {
-    return this.usersService.findOne(+id);
+  async findOne(@Param("id", ParseIntPipe) id: number): Promise<UserEntity | null> {
+    return this.usersService.findOne(id);
   }
 
   /**
@@ -89,8 +90,8 @@ export class UsersController {
     type: UserEntity,
     description: "OK. The user has been successfully updated.",
   })
-  async update(@Param("id") id: string, @Body() user: UpdateUserDto): Promise<UserEntity> {
-    return this.usersService.update(+id, user);
+  async update(@Param("id", ParseIntPipe) id: number, @Body() user: UpdateUserDto): Promise<UserEntity> {
+    return this.usersService.update(id, user);
   }
 
   /**
@@ -106,7 +107,7 @@ export class UsersController {
     type: UserEntity,
     description: "OK. The user has been successfully deleted.",
   })
-  remove(@Param("id") id: string): Promise<UserEntity> {
-    return this.usersService.remove(+id);
+  remove(@Param("id", ParseIntPipe) id: number): Promise<UserEntity> {
+    return this.usersService.remove(id);
   }
 }
