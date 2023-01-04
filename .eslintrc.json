@@ -44,12 +44,6 @@
   },
   "ignorePatterns": ["swagger-static"],
   "rules": {
-      // Rules disabled in Nest.js default ESLint config file
-      "@typescript-eslint/interface-name-prefix": "off",
-    //   "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-
       // Force all functions have explicit return type
       "@typescript-eslint/explicit-function-return-type": ["error", { "allowExpressions": true }],
 
