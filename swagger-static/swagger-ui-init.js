@@ -37,6 +37,12 @@ window.onload = function() {
                   }
                 }
               }
+            },
+            "400": {
+              "description": "Bad Request. Invalid body content."
+            },
+            "409": {
+              "description": "Conflict. Cannot update without corrupt the database."
             }
           },
           "tags": [
@@ -93,6 +99,12 @@ window.onload = function() {
                   }
                 }
               }
+            },
+            "400": {
+              "description": "Bad Request. Invalid id param."
+            },
+            "404": {
+              "description": "Not Found. The user doesn't exist."
             }
           },
           "tags": [
@@ -133,6 +145,15 @@ window.onload = function() {
                   }
                 }
               }
+            },
+            "400": {
+              "description": "Bad Request. Invalid body content and/or id param."
+            },
+            "404": {
+              "description": "Not Found. The user to update doesn't exist."
+            },
+            "409": {
+              "description": "Conflict. Cannot update without corrupt the database."
             }
           },
           "tags": [
@@ -163,6 +184,12 @@ window.onload = function() {
                   }
                 }
               }
+            },
+            "400": {
+              "description": "Bad Request. Invalid id param."
+            },
+            "404": {
+              "description": "Not Found. The user to delete doesn't exist."
             }
           },
           "tags": [

@@ -1,17 +1,24 @@
 import { createWriteStream } from "fs";
 import { get } from "http";
 import { ValidationPipe } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
+import { HttpAdapterHost, NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
+import { PrismaClientExceptionFilter } from "./prisma-client-exception/prisma-client-exception.filter";
 
 const DEFAULT_PORT = 3000;
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
+  // Validation Pipe
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
+  // Exception Filter
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
+
+  // Swagger
   const config = new DocumentBuilder()
     .setTitle("Node + Nest + TypeScript starter project API")
     .setDescription("Basic User API generated with @nestjs/swagger")

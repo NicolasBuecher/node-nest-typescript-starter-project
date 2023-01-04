@@ -39,8 +39,8 @@ export class UsersService {
    * @returns The fetched user entity or null.
    * @throws If the query failed.
    */
-  async findOne(id: number): Promise<UserEntity | null> {
-    return this.prismaService.user.findUnique({ where: { id } });
+  async findOne(id: number): Promise<UserEntity> {
+    return this.prismaService.user.findUniqueOrThrow({ where: { id } });
   }
 
   /**
