@@ -1,4 +1,5 @@
-import { Injectable } from "@nestjs/common";
+import { CACHE_MANAGER, Inject, Injectable } from "@nestjs/common";
+import { Cache } from "cache-manager";
 import { PrismaService } from "../prisma/prisma.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -9,7 +10,10 @@ import { UserEntity } from "./entities/user.entity";
  */
 @Injectable()
 export class UsersService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+    private readonly prismaService: PrismaService,
+  ) {}
 
   /**
    * Create a new user record in database.
@@ -33,14 +37,26 @@ export class UsersService {
   }
 
   /**
-   * Fetch one user record in database.
+   * Fetch one user record in database or cache.
    *
    * @param id ID of the user record to fetch.
    * @returns The fetched user entity or null.
    * @throws If the query failed.
    */
   async findOne(id: number): Promise<UserEntity> {
-    return this.prismaService.user.findUniqueOrThrow({ where: { id } });
+    const key = `user:${id}`;
+
+    // Return cached user if it exists
+    const cachedUser = await this.cacheManager.get<UserEntity>(key);
+    if (cachedUser) {
+      return cachedUser;
+    }
+
+    // Look for the user in database otherwise
+    const user = await this.prismaService.user.findUniqueOrThrow({ where: { id } });
+    this.cacheManager.set(key, user);
+
+    return user;
   }
 
   /**
@@ -52,10 +68,16 @@ export class UsersService {
    * @throws If the update query failed.
    */
   async update(id: number, user: UpdateUserDto): Promise<UserEntity> {
-    return this.prismaService.user.update({
+    // Update the user in database
+    const updatedUser = this.prismaService.user.update({
       where: { id },
       data: user,
     });
+
+    // Invalidate cache
+    this.cacheManager.del(`user:${id}`);
+
+    return updatedUser;
   }
 
   /**
@@ -66,6 +88,12 @@ export class UsersService {
    * @throws If the deletion query failed.
    */
   async remove(id: number): Promise<UserEntity> {
-    return this.prismaService.user.delete({ where: { id } });
+    // Delete the user from database
+    const deletedUser = this.prismaService.user.delete({ where: { id } });
+
+    // Invalidate cache
+    this.cacheManager.del(`user:${id}`);
+
+    return deletedUser;
   }
 }
