@@ -13,8 +13,8 @@
     "start:dev": "npx nodemon",
     "lint": "eslint '{src,apps,libs,test}/**/*.ts'",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest --passWithNoTests",
-    "test:watch": "jest --watch",
+    "test": "jest --verbose --passWithNoTests",
+    "test:watch": "jest --verbose --watch",
     "test:cov": "jest --passWithNoTests --coverage",
     "prepare": "husky install"
   },
@@ -37,6 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-angular": "^17.3.0",
+    "@golevelup/ts-jest": "^0.3.4",
     "@nestjs/cli": "^9.1.8",
     "@nestjs/testing": "^9.2.1",
     "@types/jest": "^29.2.4",
